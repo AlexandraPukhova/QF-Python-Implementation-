@@ -1,4 +1,4 @@
-# QF Python Implementation
+# Quotient Filter Implementation for Python 2.7
 
 # Why Quotient Filter?
 
