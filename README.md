@@ -6,7 +6,7 @@ Bloom filter is one of the most well-known AMQ (Approximate Membership Query) da
 
 Fundamentally, a Quotient filter is a hash table, where a hash function generates a p-bit fingerprint. The r least significant bits is called the remainder while the q = p - r most significant bits is called the quotient, hence the name quotienting. The hash table has 2q slots. (Wikipedia, n.d.) The quotient filter uses slightly more space than a Bloom filter, but much less space than a counting Bloom filter: the size of a Quotient filter is usually 10-20% more than a bloom filter with same FP (False Probability) rate, but it usually is faster. It uses 3 metadata bits per slot. 
 
-Like Bloom filer, QF can generate false positives, never deterministically stating that the eliment is definitely in the set, i.e. it is always *probably* in the set. False negatives are not possible in the general case, unless Deletion is used in conjunction with a hash function that yields more that q+r bits.[1]
+Like Bloom filer, QF can generate false positives, never deterministically stating that the eliment is definitely in the set, i.e. it is always *probably* in the set. False negatives are not possible in the general case, unless Deletion is used in conjunction with a hash function that yields more that q+r bits. [1]
 
 ##  Supported Operations
 
@@ -30,7 +30,19 @@ Initialize the QF
 Initialization of a QF is needed, before any of the supported operations can be performed.
 
 ```
-new_filter = QuotientFilter()
+new_filter = QuotientFilter(r=10, p=32, function=mmh3)
+```
+
+Insertion into QF
+
+```
+new_filter.insert('Hello',function=mmh3)
+```
+
+Proof of membership in QF
+
+```
+new_filter.contains('Hello',function=mmh3)
 ```
 
 ##  Hash functions
@@ -45,7 +57,7 @@ A Quotient Filter, like most AMQ filers, can be used for database query optimiza
 
 ##  Complexity 
 - Time complexity: Lookups and inserts require locating the start and length of an entire cluster. If the hash function generates uniformly distributed fingerprints (which MMH3 does) then the length of most runs is O(1) and it is highly likely that all runs have length O(log m) where m is the number of slots in the table.
-- Space complexity: A quotient filter requires 10–25% more space than a comparable Bloom filter but is faster because each access requires evaluating only a single hash function.[2]
+- Space complexity: A quotient filter requires 10–25% more space than a comparable Bloom filter but is faster because each access requires evaluating only a single hash function. [2]
 
 ##  References
 
