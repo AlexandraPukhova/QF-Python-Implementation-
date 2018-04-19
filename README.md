@@ -1,5 +1,18 @@
 # QF Python Implementation
 
+# Why Quotient Filter?
+
+# Supported Operations
+
+# Sample Code
+
+Initialize the filter
+
+# Hash functions 
+
+MMH3 
+
+
 # References
 
 https://en.m.wikipedia.org/wiki/Quotient_filter
