@@ -8,7 +8,7 @@ Fundamentally, a Quotient filter is a hash table, where a hash function generate
 
 Like Bloom filer, QF can generate false positives, never deterministically stating that the eliment is definitely in the set, i.e. it is always *probably* in the set. False negatives are not possible in the general case, unless Deletion is used in conjunction with a hash function that yields more that q+r bits. (Reference: https://github.com/Nomon/qf-go/blob/master/qf.go)
 
-# Supported Operations
+##  Supported Operations
 
 This implementation introduces the following operations:
 
@@ -23,27 +23,31 @@ FINDRUN
 Theoretically, QF is capable of supporting more operations. Namely, Deletion, Resize (without having to re-hash the original keys), Merge two filters (without having to re-hash the original keys)
 
 
-# Sample Code
+##  Sample Code
 
 Initialize the QF
 
 Initialization of a QF is needed, before any of the supported operations can be performed.
 
-# Hash functions
+```
+new_filter = QuotientFilter()
+```
+
+##  Hash functions
 
 MMH3 (MurmurHash3) is an open source non-cryptographic hash function suitable for general hash-based lookup a set of fast and robust hash functions. The MMH3 version that I used yields 32-bit hash values. MMH3 takes strings as input and produces integers, ensuring a good trade-off between uniformity and space.
 
 I set MMH3 as a default for my QF.
 
-# Potential Applicaiton
+##  Potential Applicaiton
 
 A Quotient Filter, like most AMQ filers, can be used for database query optimization, as well as in networks, computational biology, storage systems, and many other fields.
 
-# Complexity 
+##  Complexity 
 - Time complexity: Lookups and inserts require locating the start and length of an entire cluster. If the hash function generates uniformly distributed fingerprints (which MMH3 does) then the length of most runs is O(1) and it is highly likely that all runs have length O(log m) where m is the number of slots in the table. (Wikipedia)
 - Space complexity: A quotient filter requires 10–25% more space than a comparable Bloom filter but is faster because each access requires evaluating only a single hash function. (Wikipedia)
 
-# References
+##  References
 
 https://en.m.wikipedia.org/wiki/Quotient_filter
 
