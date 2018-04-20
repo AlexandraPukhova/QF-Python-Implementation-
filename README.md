@@ -53,10 +53,10 @@ I set MMH3 as a default for my QF.
 
 ##  Potential Applicaiton
 
-A Quotient Filter, like most AMQ filers, can be used for database query optimization, as well as in networks, computational biology, storage systems, and many other fields.
+A Quotient Filter, like most AMQ filers, can be used for database query optimization, as well as in networks, computational biology, storage systems, and many other fields. QF is beneficial, because duplicates can be tolerated efficiently and keys can be deleted, when necessary.
 
 ##  Complexity 
-- Time complexity: Lookups and inserts require locating the start and length of an entire cluster. If the hash function generates uniformly distributed fingerprints (which MMH3 does) then the length of most runs is O(1) and it is highly likely that all runs have length O(log m) where m is the number of slots in the table.
+- Time complexity: Lookups and inserts require locating the start and length of an entire cluster. If the hash function generates uniformly distributed fingerprints (which MMH3 does) then the length of most runs is O(1) and it is highly likely that all runs have length O(log m) where m is the number of slots in the table. [2]
 - Space complexity: A quotient filter requires 10–25% more space than a comparable Bloom filter but is faster because each access requires evaluating only a single hash function. [2]
 
 ##  References
