@@ -2,9 +2,9 @@
 
 ##  What is Quotient Filter and why use it?
 
-AMQ (Approximate Membership Query) data structures allow users to track whether an element is in the set. Bloom filter is one of the most well-known AMQ structures. Quotient filter (QF) is another probabilistic data structure that addresses some of the shortcomings of a Bloom filter: specifically, it allows for deletion of items, for resizing dynamically, and, potentially, for counting the number of occurrences of each item in an array (called a Counting Quotient Filter, which I am not extending my filter to). 
+AMQ (Approximate Membership Query) data structures allow users to track whether an element is in the set. Bloom filter is one of the most well-known AMQ structures. Quotient filter (QF) is another probabilistic data structure that addresses some of the shortcomings of a Bloom filter: specifically, it allows for deletion of items, for resizing dynamically, and, potentially, for counting the number of occurrences of each item in an array (called a Counting Quotient Filter, which I am not extending my filter to). [1]
 
-Fundamentally, a Quotient filter is a hash table, where a hash function generates a p-bit fingerprint. The r least significant bits is called the remainder while the q = p - r most significant bits is called the quotient (hence the name quotienting). The hash table has 2^q slots. (Wikipedia, n.d.) The quotient filter uses slightly more space than a Bloom filter, but much less space than a counting Bloom filter: the size of a Quotient filter is usually 10-20% more than a bloom filter with same FP (False Probability) rate, but it usually is faster. [1]
+Fundamentally, a Quotient filter is a hash table, where a hash function generates a p-bit fingerprint. The r least significant bits is called the remainder while the q = p - r most significant bits is called the quotient (hence the name quotienting). The hash table has 2^q slots. (Wikipedia, n.d.) The quotient filter uses slightly more space than a Bloom filter, but much less space than a counting Bloom filter: the size of a Quotient filter is usually 10-20% more than a bloom filter with same FP (False Probability) rate, but it usually is faster. [1] [5] [7] 
 
 Like Bloom filer, QF can generate false positives, never deterministically stating that the eliment is in the set, i.e. it is always *probably* in the set. False negatives are not possible in the general case, unless Deletion is used in conjunction with a hash function that yields more that q+r bits. [2]
 
@@ -47,7 +47,7 @@ new_filter.contains('Hello',function=mmh3)
 
 ##  Hash function
 
-MMH3 (MurmurHash3) is an open source non-cryptographic hash function suitable for general hash-based lookup. The MMH3 version that I used yields 32-bit hash values. MMH3 takes strings as input and produces integers, ensuring a good trade-off between uniformity and space.
+MMH3 (MurmurHash3) is an open source non-cryptographic hash function suitable for general hash-based lookup. The MMH3 version that I used yields 32-bit hash values. MMH3 takes strings as input and produces integers, ensuring a good trade-off between uniformity and space. [8]
 
 ##  Potential Applicaiton
 
@@ -70,3 +70,7 @@ A Quotient Filter, like most AMQ filers, can be used for database query optimiza
 [5] https://en.m.wikipedia.org/wiki/Quotient_filter
 
 [6] https://github.com/vedantk/quotient-filter/blob/master/qf.c
+
+[7] https://arxiv.org/pdf/1208.0290.pdf
+
+[8] https://en.wikipedia.org/wiki/MurmurHash
