@@ -54,7 +54,7 @@ MMH3 (MurmurHash3) is an open source non-cryptographic hash function suitable fo
 A Quotient Filter, like most AMQ filers, can be used for database query optimization, as well as in networks, computational biology, storage systems, and many other fields. QF is beneficial, because duplicates can be tolerated efficiently and keys can be deleted, when necessary. [4]
 
 ##  Complexity 
-- Time complexity: Searches and insertions require locating the start of an entire cluster. If the hash function generates uniformly distributed fingerprints (which MMH3 does), then the length of most runs is O(1), and it is highly likely that all runs have length O(log m) where m is the number of slots in the table. [5]
+- Time complexity: Searches and insertions require locating the start of an entire cluster, which consists of a contiguous set of runs (i.e. sets where all fingerprints have the same quotient and are stored in contiguous slots). If the hash function generates uniformly distributed fingerprints (which MMH3 does), then the length of most runs is O(1), and it is highly likely that all runs have length O(log m) where m is the number of slots in the table. [5]
 - Space complexity: A quotient filter requires 10–20% more space than a comparable Bloom filter but is faster because each access requires evaluating only a single hash function. QF uses 3 metadata bits per slot.[5]
 
 ##  References
