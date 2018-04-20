@@ -68,3 +68,5 @@ A Quotient Filter, like most AMQ filers, can be used for database query optimiza
 [4] https://dl.acm.org/citation.cfm?id=3035918.3035963
 
 [5] https://en.m.wikipedia.org/wiki/Quotient_filter
+
+[6] https://github.com/vedantk/quotient-filter/blob/master/qf.c
