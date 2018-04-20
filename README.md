@@ -30,7 +30,7 @@ Initialize the QF
 Initialization of a QF is needed, before any of the supported operations can be performed.
 
 ```
-new_filter = QuotientFilter(r=10, p=32, function=mmh3)
+new_filter = QuotientFilter(r=10, p=32, function=mmh3) # 32-bit MMH3
 ```
 
 Insertion into QF
