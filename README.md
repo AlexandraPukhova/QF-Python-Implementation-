@@ -20,7 +20,7 @@ FINDCLUSTER
 
 FINDRUN
 
-Theoretically, QF is capable of supporting more operations. Namely, Deletion, Resize (without having to re-hash the original keys), Merge two filters (without having to re-hash the original keys)
+Theoretically, QF is capable of supporting more operations. Namely, Deletion, Resize and Merge two filters (without having to re-hash the original keys).
 
 
 ##  Sample Code
@@ -45,19 +45,17 @@ Proof of membership in QF
 new_filter.contains('Hello',function=mmh3)
 ```
 
-##  Hash functions
+##  Hash function
 
-MMH3 (MurmurHash3) is an open source non-cryptographic hash function suitable for general hash-based lookup a set of fast and robust hash functions. The MMH3 version that I used yields 32-bit hash values. MMH3 takes strings as input and produces integers, ensuring a good trade-off between uniformity and space.
-
-I set MMH3 as a default for my QF.
+MMH3 (MurmurHash3) is an open source non-cryptographic hash function suitable for general hash-based lookup. The MMH3 version that I used yields 32-bit hash values. MMH3 takes strings as input and produces integers, ensuring a good trade-off between uniformity and space.
 
 ##  Potential Applicaiton
 
-A Quotient Filter, like most AMQ filers, can be used for database query optimization, as well as in networks, computational biology, storage systems, and many other fields. QF is beneficial, because duplicates can be tolerated efficiently and keys can be deleted, when necessary.
+A Quotient Filter, like most AMQ filers, can be used for database query optimization, as well as in networks, computational biology, storage systems, and many other fields. QF is beneficial, because duplicates can be tolerated efficiently and keys can be deleted, when necessary. [4]
 
 ##  Complexity 
-- Time complexity: Lookups and inserts require locating the start and length of an entire cluster. If the hash function generates uniformly distributed fingerprints (which MMH3 does) then the length of most runs is O(1) and it is highly likely that all runs have length O(log m) where m is the number of slots in the table. [4]
-- Space complexity: A quotient filter requires 10–25% more space than a comparable Bloom filter but is faster because each access requires evaluating only a single hash function. [4]
+- Time complexity: Lookups and inserts require locating the start and length of an entire cluster. If the hash function generates uniformly distributed fingerprints (which MMH3 does) then the length of most runs is O(1) and it is highly likely that all runs have length O(log m) where m is the number of slots in the table. [5]
+- Space complexity: A quotient filter requires 10–20% more space than a comparable Bloom filter but is faster because each access requires evaluating only a single hash function. [5]
 
 ##  References
 
@@ -67,4 +65,6 @@ A Quotient Filter, like most AMQ filers, can be used for database query optimiza
 
 [3] https://www3.cs.stonybrook.edu/~ppandey/files/p775-pandey.pdf
 
-[4] https://en.m.wikipedia.org/wiki/Quotient_filter
+[4] https://dl.acm.org/citation.cfm?id=3035918.3035963
+
+[5] https://en.m.wikipedia.org/wiki/Quotient_filter
